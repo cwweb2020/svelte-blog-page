@@ -1,0 +1,62 @@
+{
+  "1": {
+    "titulo": "Introducción a la Programación",
+    "descripcion": "Un curso básico para aprender los fundamentos de la programación."
+  },
+  "2": {
+    "titulo": "Desarrollo Web con HTML y CSS",
+    "descripcion": "Aprende a crear páginas web utilizando HTML y CSS."
+  },
+  "3": {
+    "titulo": "JavaScript Avanzado",
+    "descripcion": "Explora técnicas avanzadas en JavaScript para mejorar tus habilidades."
+  },
+  "4": {
+    "titulo": "Bases de Datos SQL",
+    "descripcion": "Curso sobre el diseño y manejo de bases de datos utilizando SQL."
+  },
+  "5": {
+    "titulo": "Desarrollo de Aplicaciones Móviles",
+    "descripcion": "Crea aplicaciones móviles para Android e iOS."
+  },
+  "6": {
+    "titulo": "Machine Learning",
+    "descripcion": "Introducción al aprendizaje automático y sus aplicaciones."
+  },
+  "7": {
+    "titulo": "Redes de Computadoras",
+    "descripcion": "Comprende los fundamentos de las redes de computadoras y su funcionamiento."
+  },
+  "8": {
+    "titulo": "Seguridad Informática",
+    "descripcion": "Aprende las mejores prácticas para proteger sistemas y datos."
+  },
+  "9": {
+    "titulo": "Desarrollo de Videojuegos",
+    "descripcion": "Curso para aprender a desarrollar videojuegos desde cero."
+  },
+  "10": {
+    "titulo": "Inteligencia Artificial",
+    "descripcion": "Explora el mundo de la inteligencia artificial y sus aplicaciones prácticas."
+  },
+  "11": {
+    "titulo": "Big Data",
+    "descripcion": "Aprende a manejar y analizar grandes volúmenes de datos."
+  },
+  "12": {
+    "titulo": "Python para Principiantes",
+    "descripcion": "Curso introductorio para aprender a programar en Python."
+  },
+  "13": {
+    "titulo": "Administración de Sistemas Linux",
+    "descripcion": "Domina la administración de sistemas operativos Linux."
+  },
+  "14": {
+    "titulo": "Desarrollo Backend con Node.js",
+    "descripcion": "Aprende a crear servidores y servicios backend utilizando Node.js."
+  },
+  "15": {
+    "titulo": "Análisis de Datos con R",
+    "descripcion": "Curso para analizar y visualizar datos usando el lenguaje R."
+  }
+}

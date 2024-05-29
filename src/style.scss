@@ -1,0 +1,17 @@
+* {
+  background-color: tan;
+  font-family: monospace;
+}
+
+a {
+  font-family: monospace;
+  background-color: #333333;
+  font-size: 18px;
+}
+
+@media screen and (max-width: 900px) {
+  body,
+  html {
+    overflow-x: hidden;
+  }
+}
