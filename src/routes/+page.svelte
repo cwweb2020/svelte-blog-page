@@ -19,21 +19,24 @@
 
   let showBreaks;
   const updateShowBreaks = () => {
-    showBreaks = window.innerWidth >= 900;
+    showBreaks = window.innerWidth < 900;
   };
   // console.log(city);
 
-  let data;
+  let data = [];
   let loading = true;
   let algo = true;
   onMount(async () => {
     window.addEventListener("resize", updateShowBreaks);
     updateShowBreaks();
     try {
-      const res = await axios(`https://jsonplaceholder.typicode.com/comments/`);
-      data = res.data;
-      let halfLength = Math.ceil(data.length / 70);
-      data = data.slice(0, halfLength);
+      const res = await axios(
+        `https://blog-6253e-default-rtdb.firebaseio.com/blog.json`
+      );
+      data = Object.keys(res.data).map((id) => ({
+        id,
+        ...res.data[id],
+      }));
 
       // console.log(data);
     } catch (error) {
@@ -45,24 +48,28 @@
   // console.log(loading);
 </script>
 
-<h1>Lista de blogs</h1>
+<h1>Bienvenidos a mi blog</h1>
 
-{#if showBreaks}
+{#if !showBreaks}
   <br />
   <br />
   <br />
 {/if}
 {#if loading}
-  <p class="loading">loading...</p>
-{:else}
+  <h3 class="loading">loading...</h3>
+{:else if data.length > 0}
   <img src="/1.jpg" alt="" />
   <ul>
-    {#each data as { name, body }}
+    {#each data as { titulo, descripcion }}
       <li>
-        <h3><strong>{name}</strong></h3>
+        <h3>
+          {#if titulo !== undefined}<strong>{titulo}</strong>{/if}
+        </h3>
       </li>
 
-      <p class:normal={!algo} class:inactive={algo}>{body}</p>
+      <p class:normal={!algo} class:inactive={algo}>
+        {#if titulo !== undefined}{descripcion}{/if}
+      </p>
     {/each}
   </ul>
 {/if}
@@ -83,7 +90,12 @@
 
   h3 {
     /* margin-bottom: 8px; */
-    font-size: 18px;
+    font-size: 22px;
+    font-family: monospace;
+    text-transform: capitalize;
+  }
+  .loading {
+    font-size: 23px;
     font-family: monospace;
     text-transform: capitalize;
   }

@@ -3,23 +3,36 @@
 <script>
   import { page } from "$app/stores";
   import { onMount } from "svelte";
+  import axios from "axios";
+  import { goto } from "$app/navigation";
 
-  // Datos de los blogs (ejemplo)
-  const blogs = [
-    {
-      id: 1,
-      title: "Título del Blog 1",
-      text: "Contenido del Blog 1...",
-      imageUrl: "url_de_la_imagen_1.jpg",
-    },
-    {
-      id: 2,
-      title: "Título del Blog 2",
-      text: "Contenido del Blog 2...",
-      imageUrl: "url_de_la_imagen_2.jpg",
-    },
-    // Agregar más blogs según sea necesario
-  ];
+  let showBreaks;
+  const updateShowBreaks = () => {
+    showBreaks = window.innerWidth < 900;
+  };
+  // Datos de los blogs
+  let data = [];
+  let loading = true;
+
+  onMount(async () => {
+    window.addEventListener("resize", updateShowBreaks);
+    updateShowBreaks();
+    try {
+      const res = await axios(
+        `https://blog-6253e-default-rtdb.firebaseio.com/blog.json`
+      );
+      data = Object.keys(res.data).map((id) => ({
+        id,
+        ...res.data[id],
+      }));
+
+      // console.log(data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      loading = false;
+    }
+  });
 
   let routeName;
   let cleanedRouteName;
@@ -34,6 +47,10 @@
     routeName = $page.url.pathname;
     cleanedRouteName = routeName.replace(/\//g, "");
   });
+
+  function goToBlog(id) {
+    goto(`/blog/${id}`);
+  }
 </script>
 
 <h1>Últimos Blogs</h1>
@@ -45,12 +62,21 @@
 <br />
 
 <div class="container">
-  {#each blogs as blog}
-    <div class="blog-container">
-      <img src="/1.jpg" alt={blog.title} class="blog-image" />
+  {#if loading}
+    <h3 class="loading">loading...</h3>
+  {/if}
+  {#each data as { titulo, descripcion, id }}
+    <div class="blog-container" on:click={() => goToBlog(id)}>
+      {#if titulo !== undefined}
+        <img src="/1.jpg" alt={titulo} class="blog-image" />
+      {/if}
       <div class="blog-content">
-        <h2 class="blog-title">{blog.title}</h2>
-        <p class="blog-text">{blog.text}</p>
+        <h2 class="blog-title">
+          {#if titulo !== undefined}{titulo}{/if}
+        </h2>
+        <p class="blog-text">
+          {#if titulo !== undefined}{descripcion}{/if}
+        </p>
       </div>
     </div>
   {/each}
@@ -61,6 +87,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    cursor: pointer;
   }
 
   .blog-image {
@@ -95,5 +122,10 @@
 
   :global(.global-class) {
     color: red;
+  }
+  .loading {
+    font-size: 23px;
+    font-family: monospace;
+    text-transform: capitalize;
   }
 </style>

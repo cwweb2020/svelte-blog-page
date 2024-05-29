@@ -55,6 +55,7 @@
   }
 
   .home-link {
-    background: tan;
+    background: tan !important;
+    font-size: 18px !important;
   }
 </style>
